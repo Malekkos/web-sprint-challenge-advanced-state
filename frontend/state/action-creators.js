@@ -1,5 +1,11 @@
 // ❗ You don't need to add extra action creators to achieve MVP
-export function moveClockwise() { }
+
+import axios from "axios"
+import { RESET_FORM, MOVE_CLOCKWISE } from "./action-types"
+
+export function moveClockwise() {
+  return {type: MOVE_CLOCKWISE, payload: + 1}
+ }
 
 export function moveCounterClockwise() { }
 
@@ -11,7 +17,9 @@ export function setQuiz() { }
 
 export function inputChange() { }
 
-export function resetForm() { }
+export function resetForm() {
+  return {type: RESET_FORM}
+ }
 
 // ❗ Async action creators
 export function fetchQuiz() {
@@ -19,6 +27,11 @@ export function fetchQuiz() {
     // First, dispatch an action to reset the quiz state (so the "Loading next quiz..." message can display)
     // On successful GET:
     // - Dispatch an action to send the obtained quiz to its state
+    dispatch(resetForm())
+    axios.get("http://localhost:9000/api/quiz/next")
+    .then(res => {
+      dispatch()
+    })
   }
 }
 export function postAnswer() {
