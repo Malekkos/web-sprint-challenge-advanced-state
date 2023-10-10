@@ -1,77 +1,36 @@
 // ❗ You don't need to add extra reducers to achieve MVP
 import { combineReducers } from 'redux'
-import { MOVE_COUNTERCLOCKWISE_REMOVER, MOVE_CLOCKWISE_REMOVER, MOVE_CLOCKWISE, MOVE_COUNTERCLOCKWISE } from './action-types'
+import { MOVE_CLOCKWISE, MOVE_COUNTERCLOCKWISE } from './action-types'
 
 const initialWheelState = 0 
-
-function wheel(state = initialState, action) {
+function wheel(state = initialWheelState, action) {
   switch (action.type) {
-    case (MOVE_CLOCKWISE): {
-      if( state.wheel === 5) {
-      return{
-        ...state,
-        wheel: 0
-      }
-      } else {
-      return {
-      ...state,
-      wheel: state.wheel + action.payload
-      }
-      }
-      }
-    case (MOVE_COUNTERCLOCKWISE): {
-      if ( state.wheel === 0) {
-        return {
-          ...state, 
-          wheel: 5
-      }
-      } else {
-      return {
-        ...state,
-        wheel: state.wheel - action.payload
-      }
-      }
-      }
-      default:
-        return state
-      }
-    }
-    const initialWheelStateRemover = 5
+    case (MOVE_CLOCKWISE): { 
+    console.log(state)  
+    // console.log(action.payload)
     
-    function wheelRemover(state = initialState, action) {
-      switch(action.type) {
-        case (MOVE_CLOCKWISE_REMOVER): {
-          
-          if( state.wheelRemover === 5) {
-          return{
-            ...state,
-            wheelRemover:  0
-          }
-          } else {
-          return {
-            ...state, 
-          wheelRemover: state.wheelRemover + action.payload
-          }
-          }
-          }
-        case (MOVE_COUNTERCLOCKWISE_REMOVER): {
-          wheelRemover = wheelRemover + 2
-          if ( state.wheelRemover === 0) {
-            return {
-              ...state, 
-              wheelRemover: 5
-          }
-          } else {
-          return {
-            ...state,
-            wheelRemover: state.wheelRemover - action.payload
-          }
-          }
-          }
-          default:
-            return state
-          }
+    if (state === 5) {
+      console.log("working")
+      
+      state = 0
+    } else {
+      console.log("WORKING")
+    state = state + action.payload
     }
+  }
+  case (MOVE_COUNTERCLOCKWISE): {
+    console.log(state)
+    // console.log(action.payload)
+    if(state === 0) {
+      state = 5
+    } else {
+    state = state - action.payload
+    }
+  }
+  default: 
+  return state
+  };
+  }
 const initialQuizState = null
 function quiz(state = initialQuizState, action) {
   return state
@@ -95,11 +54,6 @@ const initialFormState = {
 function form(state = initialFormState, action) {
   return state
 }
-const initialState = {
-  wheel: initialWheelState,
-  quiz: initialQuizState,
-  selectedAnswer: initialSelectedAnswerState,
-  wheelRemover: initialWheelStateRemover,
-}
 
-export default combineReducers({ wheelRemover, wheel, quiz, selectedAnswer, infoMessage, form })
+
+export default combineReducers({wheel, quiz, selectedAnswer, infoMessage, form })

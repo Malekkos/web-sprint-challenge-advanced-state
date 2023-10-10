@@ -1,22 +1,16 @@
 // ❗ You don't need to add extra action creators to achieve MVP
 
 import axios from "axios"
-import { RESET_FORM, MOVE_CLOCKWISE, MOVE_COUNTERCLOCKWISE, MOVE_CLOCKWISE_REMOVER, MOVE_COUNTERCLOCKWISE_REMOVER } from "./action-types"
+import { RESET_FORM, MOVE_CLOCKWISE, MOVE_COUNTERCLOCKWISE} from "./action-types"
 
 export function moveClockwise() {
-  
   return {type: MOVE_CLOCKWISE, payload: 1}
  }
 
 export function moveCounterClockwise() {
   return {type: MOVE_COUNTERCLOCKWISE, payload: 1}
  }
- export function moveCounterClockwiseRemover() {
-  return {type: MOVE_COUNTERCLOCKWISE_REMOVER, payload: 1}
- }
- export function moveClockwiseRemover() {
-  return {type: MOVE_CLOCKWISE_REMOVER, payload: 1}
- }
+
 
 export function selectAnswer() { }
 
