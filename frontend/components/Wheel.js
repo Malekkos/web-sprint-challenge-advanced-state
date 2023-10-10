@@ -4,22 +4,28 @@ import { moveClockwise, moveCounterClockwise } from '../state/action-creators'
 import { connect } from 'react-redux'
 
 
-function Wheel({ moveClockwise, moveCounterClockwise, wheel}) {
-
+function Wheel({ moveClockwise, moveCounterClockwise, wheel, wheelReverse}) {
+  // console.log(wheel, wheelReverse)
   // useEffect(() => {
-  //   const wheelWrapper = document.getElementById("wheel")
-  //   const wheelRemover = document.getElementById("wheel")
     
-  //   // console.log(wheelRemover)
-
-  //   // console.log(wheelWrapper.children[`${wheel.wheel}`])
-  //   wheelWrapper.children[`${wheel.wheel}`].className = "cog active"
-  //   wheelWrapper.children[`${wheel.wheel}`].textContent = "B"
-  //   wheelRemover.children[remover].className = "cog"
-  //   wheelRemover.children[remover].textContent = ""
-  //   console.log("rendered")
-  // }, [wheel])
-
+  // })
+  const buttonCounter = () => {
+    const wheelWrapper = document.getElementById("wheel")
+    // const wheelRemover = document.getElementById("wheel")
+    
+    wheelWrapper.children[`${wheel}`].className = "cog active"
+    wheelWrapper.children[`${wheel}`].textContent = "B"
+    wheelWrapper.children[`${wheelReverse}` - 1].textContent = ""
+    wheelWrapper.children[`${wheelReverse}` - 1].className = "cog"
+  }
+  const buttonClockwise = () => {
+    const wheelWrapper = document.getElementById("wheel")
+    
+    wheelWrapper.children[`${wheel}`].className = "cog active"
+    wheelWrapper.children[`${wheel}`].textContent = "B"
+    wheelWrapper.children[`${wheelReverse}` + 1].textContent = ""
+    wheelWrapper.children[`${wheelReverse}` + 1].className = "cog"
+  }
   // console.log(wheel)
   
   return (
@@ -33,17 +39,18 @@ function Wheel({ moveClockwise, moveCounterClockwise, wheel}) {
         <div className="cog" style={{ "--i": 5 }}></div>{/* --i is a custom CSS property, no need to touch that nor the style object */}
       </div>
       <div id="keypad">
-        <button id="counterClockwiseBtn" onClick={() => moveCounterClockwise()} >Counter clockwise</button>
-        <button id="clockwiseBtn" onClick={() => moveClockwise()}>Clockwise</button>
+        <button id="counterClockwiseBtn" onClick={() =>  moveCounterClockwise() && buttonCounter() } >Counter clockwise</button>
+        <button id="clockwiseBtn" onClick={() => moveClockwise() && buttonClockwise()}>Clockwise</button>
       </div>
     </div>
   )
 }
 
 const mapStateToProps = state => {
-  // console.log(state.wheel.wheel)
+  console.log(state.wheel)
   return {
-    wheel: state.wheel,
+    wheel: state.wheel.wheel,
+    wheelReverse: state.wheel.wheelReverse
   }
 }
 

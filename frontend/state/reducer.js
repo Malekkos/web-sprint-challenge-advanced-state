@@ -2,35 +2,63 @@
 import { combineReducers } from 'redux'
 import { MOVE_CLOCKWISE, MOVE_COUNTERCLOCKWISE } from './action-types'
 
-const initialWheelState = 0 
+const initialWheelState = {wheel: 5, wheelReverse: 1}
 function wheel(state = initialWheelState, action) {
+  // const wheelState = state
+  // console.log(state)
+  // state.wheel = 0
+  // const wheelReverseClockwise = state - 1
+  // const wheelReverseCounterClockwise = state + 1
   switch (action.type) {
-    case (MOVE_CLOCKWISE): { 
-    console.log(state)  
-    // console.log(action.payload)
-    
-    if (state === 5) {
-      console.log("working")
-      
-      state = 0
-    } else {
-      console.log("WORKING")
-    state = state + action.payload
+    case (MOVE_CLOCKWISE): {
+    if (state.wheel === 5) {
+      return {
+        ...state,
+        wheel: 0,
+        wheelReverse: state.wheelReverse - 1,
+        // wheelReverse: 5
+
+      }
+    } else if (state.wheel === 0) {
+      return {
+      ...state, 
+      wheel: 1,
+      wheelReverse: 0 ,
+
     }
-  }
+    } else {
+      return {
+        // console.log("WORKING")
+        ...state,
+        wheelReverse: state.wheel - action.payload,
+        wheel: state.wheel + action.payload,
+
+      }
+    }
+    }
+
+
   case (MOVE_COUNTERCLOCKWISE): {
-    console.log(state)
+    // console.log(state)
     // console.log(action.payload)
-    if(state === 0) {
-      state = 5
+    if(state.wheel === 0) {
+      return {
+      ...state,
+      wheel: 5,
+      wheelReverse: state.wheelReverse - 1
+    }  
     } else {
-    state = state - action.payload
-    }
+      return{
+      ...state,
+      wheelReverse: state.wheel + 1,
+      wheel: state.wheel - action.payload,
+  }  
+  }
   }
   default: 
   return state
   };
-  }
+}
 const initialQuizState = null
 function quiz(state = initialQuizState, action) {
   return state
