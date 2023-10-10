@@ -4,7 +4,7 @@ import { moveClockwise, moveCounterClockwise } from '../state/action-creators'
 import { connect } from 'react-redux'
 
 function Wheel({ moveClockwise, moveCounterClockwise}) {
-  console.log(moveClockwise)
+  
   return (
     <div id="wrapper">
       <div id="wheel">
