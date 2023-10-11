@@ -59,7 +59,7 @@ function wheel(state = initialWheelState, action) {
   return state
   };
 }
-const initialQuizState = null
+const initialQuizState = {quiz:{quiz_id: "jbdrc", question: "What is a closure?", answers: [{ answer_id: "rhqys", test: "A function plus its bindings"}, { answer_id: "igjrg", test: "Clearly some kind of elephant"}]}}
 function quiz(state = initialQuizState, action) {
   // console.log(action)
   // console.log(state)
@@ -75,7 +75,7 @@ function quiz(state = initialQuizState, action) {
       console.log("Resetting Form")
       return {
         ...state,
-        quiz: null
+        quiz: initialQuizState
       }
     }
     default: 
