@@ -1,13 +1,27 @@
 import React, { useEffect} from 'react'
 import axios from "axios"
-import { connect } from 'react-redux'
 import { fetchQuiz } from '../state/action-creators'
-import { useDispatch } from 'react-redux'
+import { useDispatch, connect } from 'react-redux'
+
+
+
 function Quiz(fetchQuiz) {
-
   const dispatch = useDispatch()
-  // dispatch(fetchQuiz)
+  // fetchQuiz.fetchQuiz()
+  useEffect(() => {
+    const fetchDataAndDispatch = async () => {
+      const data = await fetchQuiz.fetchQuiz();
+      if (data) {
+        // Dispatch an action to update the Redux store with the fetched data
+        dispatch(fetchUserData(data));
+      }
+    }
+    fetchDataAndDispatch()
 
+    }, [])
+
+
+  // componentDidMount()
 
   return (
     <div id="wrapper">
@@ -42,8 +56,8 @@ function Quiz(fetchQuiz) {
 }
 
 const mapStateToProps = state => {
-  // fetchQuiz
-  // console.log(state)
+  console.log(state.quiz)
+  // const { quiz } = state.quiz
   return {
 
   }
