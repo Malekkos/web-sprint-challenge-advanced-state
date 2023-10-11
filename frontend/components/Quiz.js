@@ -1,6 +1,14 @@
-import React from 'react'
+import React, { useEffect} from 'react'
+import axios from "axios"
+import { connect } from 'react-redux'
+import { fetchQuiz } from '../state/action-creators'
+import { useDispatch } from 'react-redux'
+function Quiz(fetchQuiz) {
 
-export default function Quiz(props) {
+  const dispatch = useDispatch()
+  // dispatch(fetchQuiz)
+
+
   return (
     <div id="wrapper">
       {
@@ -32,3 +40,13 @@ export default function Quiz(props) {
     </div>
   )
 }
+
+const mapStateToProps = state => {
+  // fetchQuiz
+  // console.log(state)
+  return {
+
+  }
+}
+
+export default connect(mapStateToProps, { fetchQuiz })(Quiz)
