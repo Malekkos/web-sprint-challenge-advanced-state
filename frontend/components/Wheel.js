@@ -1,41 +1,14 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import { moveClockwise, moveCounterClockwise } from '../state/action-creators'
 import { connect } from 'react-redux'
 
 
-function Wheel({ moveClockwise, moveCounterClockwise, wheel, wheelReverse}) {
-  // console.log(wheel, wheelReverse)
-  // useEffect(() => {
-    
-  // })
-  // const buttonCounter = () => {
-    // const wheelWrapper = document.getElementById("wheel")
-    // const wheelRemover = document.getElementById("wheel")
-    
-  //   wheelWrapper.children[`${wheel}`].className = "cog active"
-  //   wheelWrapper.children[`${wheel}`].textContent = "B"
-  //   wheelWrapper.children[`${wheelReverse}` - 1].textContent = ""
-  //   wheelWrapper.children[`${wheelReverse}` - 1].className = "cog"
-  // }
-  // const buttonClockwise = () => {
-  //   const wheelWrapper = document.getElementById("wheel")
-    
-  //   wheelWrapper.children[`${wheel}`].className = "cog active"
-  //   wheelWrapper.children[`${wheel}`].textContent = "B"
-  //   wheelWrapper.children[`${wheelReverse}` + 1].textContent = ""
-  //   wheelWrapper.children[`${wheelReverse}` + 1].className = "cog"
-  // }
-  // console.log(wheel)
-  // console.log([...Array(6)])
+function Wheel({ moveClockwise, moveCounterClockwise, wheel}) {
+  
   return (
     <div id="wrapper">
       <div id="wheel">
-        {/* {[...Array(6).map(val => {
-          {console.log(val)}
-          <div className={`cog, ${val == wheel ? "active" : ""}`} style={{ "--i": val}}>{val == wheel ? "active" : ""}</div>
-        })]} */}
-        {/* <div>hlelo</div> */}
         <div className={`cog ${wheel == 0 ? "active" : ""}`} style={{ "--i": 0 }}>{`${wheel == 0 ? "B" : ""}`}</div>
         <div className={`cog ${wheel == 1 ? "active" : ""}`} style={{ "--i": 1 }}>{`${wheel == 1 ? "B" : ""}`}</div>
         <div className={`cog ${wheel == 2 ? "active" : ""}`} style={{ "--i": 2 }}>{`${wheel == 2 ? "B" : ""}`}</div>
