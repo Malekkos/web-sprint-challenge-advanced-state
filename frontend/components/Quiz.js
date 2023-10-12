@@ -6,7 +6,6 @@ import { useDispatch, connect } from 'react-redux'
 
 
 function Quiz(fetchQuiz, quiz) {
-  
   const dispatch = useDispatch()
   useEffect(() => {
     const fetchDataAndDispatch = () => {
@@ -17,26 +16,26 @@ function Quiz(fetchQuiz, quiz) {
     }
     fetchDataAndDispatch()
     }, [quiz])
-    console.log(quiz)
-
+    console.log(fetchQuiz.quiz)
+    
   return (
     <div id="wrapper">
       {
         // quiz already in state? Let's use that, otherwise render "Loading next quiz..."
-      true ? (
+      fetchQuiz.quiz == null ? 'Loading next quiz...' : (
           <>
-            <h2>{quiz.question}</h2>
+            <h2>{fetchQuiz.quiz.question}</h2>
 
             <div id="quizAnswers">
               <div className="answer selected">
-                {/* {quiz.answers[0]} */}
+                {fetchQuiz.quiz.answers[0].text}
                 <button>
                   SELECTED
                 </button>
               </div>
 
               <div className="answer">
-                An elephant
+                {fetchQuiz.quiz.answers[1].text}
                 <button>
                   Select
                 </button>
@@ -45,7 +44,7 @@ function Quiz(fetchQuiz, quiz) {
 
             <button id="submitAnswerBtn">Submit answer</button>
           </>
-        ) : 'Loading next quiz...'
+        )
       }
     </div>
   )
