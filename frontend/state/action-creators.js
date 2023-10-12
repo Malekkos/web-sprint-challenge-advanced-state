@@ -4,11 +4,11 @@ import axios from "axios"
 import { SET_SELECTED_ANSWER, RESET_FORM, MOVE_CLOCKWISE, MOVE_COUNTERCLOCKWISE, SET_QUIZ_INTO_STATE, RESET_QUIZ} from "./action-types"
 
 export function moveClockwise() {
-  return {type: MOVE_CLOCKWISE, payload: 1}
+  return {type: MOVE_CLOCKWISE}
  }
 
 export function moveCounterClockwise() {
-  return {type: MOVE_COUNTERCLOCKWISE, payload: 1}
+  return {type: MOVE_COUNTERCLOCKWISE}
  }
 
 

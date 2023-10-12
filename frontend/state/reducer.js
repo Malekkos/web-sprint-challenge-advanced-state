@@ -2,58 +2,16 @@
 import { combineReducers } from 'redux'
 import { MOVE_CLOCKWISE, MOVE_COUNTERCLOCKWISE, SET_QUIZ_INTO_STATE, RESET_FORM, RESET_QUIZ } from './action-types'
 
-const initialWheelState = {wheel: 5, wheelReverse: 1}
+const initialWheelState = 0
 function wheel(state = initialWheelState, action) {
-  // const wheelState = state
-  // console.log(state)
-  // state.wheel = 0
-  // const wheelReverseClockwise = state - 1
-  // const wheelReverseCounterClockwise = state + 1
   switch (action.type) {
     case (MOVE_CLOCKWISE): {
-    if (state.wheel === 5) {
-      return {
-        ...state,
-        wheel: 0,
-        wheelReverse: state.wheelReverse - 1,
-        // wheelReverse: 5
-
-      }
-    } else if (state.wheel === 0) {
-      return {
-      ...state, 
-      wheel: 1,
-      wheelReverse: 0 ,
-
+    const newIndex = state + 1
+    return newIndex > 5 ? 0 : newIndex
     }
-    } else {
-      return {
-        // console.log("WORKING")
-        ...state,
-        wheelReverse: state.wheel - action.payload,
-        wheel: state.wheel + action.payload,
-
-      }
-    }
-    }
-
-
   case (MOVE_COUNTERCLOCKWISE): {
-    // console.log(state)
-    // console.log(action.payload)
-    if(state.wheel === 0) {
-      return {
-      ...state,
-      wheel: 5,
-      wheelReverse: state.wheelReverse - 1
-    }  
-    } else {
-      return{
-      ...state,
-      wheelReverse: state.wheel + 1,
-      wheel: state.wheel - action.payload,
-  }  
-  }
+    const newIndex = state - 1
+    return newIndex < 0 ? 5 : newIndex
   }
   default: 
   return state
