@@ -13,6 +13,7 @@ export function moveCounterClockwise() {
 
 
 export function selectAnswer(answer) {
+  console.log("You've selected an answer",answer)
   return {type: SET_SELECTED_ANSWER, payload: answer }
  }
 
