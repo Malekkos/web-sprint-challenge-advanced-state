@@ -36,8 +36,8 @@ export function fetchQuiz() {
     // First, dispatch an action to reset the quiz state (so the "Loading next quiz..." message can display)
     // On successful GET:
     // - Dispatch an action to send the obtained quiz to its state
-    // console.log("IM IN HERE")
-    dispatch({type: RESET_QUIZ})
+    dispatch({type: SET_QUIZ_INTO_STATE, payload: null})
+    console.log("IM IN HERE")
     axios.get("http://localhost:9000/api/quiz/next")
     .then(res => {
       console.log("res.data: ", res.data)

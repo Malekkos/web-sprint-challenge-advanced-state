@@ -1,38 +1,35 @@
-import React, { useEffect} from 'react'
+import React, { useEffect } from 'react'
 import axios from "axios"
 import { fetchQuiz } from '../state/action-creators'
 import { useDispatch, connect } from 'react-redux'
 
 
 
-function Quiz(fetchQuiz, answers, question, quiz_id) {
+function Quiz(fetchQuiz, quiz) {
+  
   const dispatch = useDispatch()
-  // fetchQuiz.fetchQuiz()
   useEffect(() => {
-    const fetchDataAndDispatch = async () => {
-      const data = await fetchQuiz.fetchQuiz();
+    const fetchDataAndDispatch = () => {
+      const data = fetchQuiz.fetchQuiz();
       if (data) {
         dispatch(fetchUserData(data));
       }
     }
     fetchDataAndDispatch()
+    }, [quiz])
+    console.log(quiz)
 
-    }, [])
-
-
-  // componentDidMount()
-    console.log(question, ",", quiz_id, ",", answers)
   return (
     <div id="wrapper">
       {
         // quiz already in state? Let's use that, otherwise render "Loading next quiz..."
-        true ? (
+      true ? (
           <>
-            <h2>{question}</h2>
+            <h2>{quiz.question}</h2>
 
             <div id="quizAnswers">
               <div className="answer selected">
-                A function
+                {/* {quiz.answers[0]} */}
                 <button>
                   SELECTED
                 </button>
@@ -55,14 +52,9 @@ function Quiz(fetchQuiz, answers, question, quiz_id) {
 }
 
 const mapStateToProps = state => {
-  console.log(state.quiz.quiz)
-  console.log(state.quiz.quiz.quiz_id)
-  console.log(state.quiz.quiz.question)
-  // const { quiz } = state.quiz
+  console.log("State in mapStateToProps", state.quiz)
   return {
-    answers: [state.quiz.quiz.answers[0], state.quiz.quiz.answers[1]],
-    question: state.quiz.quiz.question,
-    quiz_id: state.quiz.quiz.quiz_id
+    quiz: state.quiz,
   }
 }
 
