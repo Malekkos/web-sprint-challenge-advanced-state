@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from "axios"
 import { fetchQuiz } from '../state/action-creators'
 import { useDispatch, connect } from 'react-redux'
@@ -6,6 +6,8 @@ import { useDispatch, connect } from 'react-redux'
 
 
 function Quiz(fetchQuiz, quiz) {
+
+  const [selectedButton, setSelectedButton] = useState(null)
   const dispatch = useDispatch()
   useEffect(() => {
     const fetchDataAndDispatch = () => {
@@ -17,7 +19,12 @@ function Quiz(fetchQuiz, quiz) {
     fetchDataAndDispatch()
     }, [quiz])
     console.log(fetchQuiz.quiz)
+
+    const handleClick = (button) => {
+      setSelectedButton(button)
+    }
     
+
   return (
     <div id="wrapper">
       {
@@ -27,17 +34,17 @@ function Quiz(fetchQuiz, quiz) {
             <h2>{fetchQuiz.quiz.question}</h2>
 
             <div id="quizAnswers">
-              <div className="answer selected">
+              <div className={`answer ${selectedButton == "button 1" ? "selected" : ""}`}>
                 {fetchQuiz.quiz.answers[0].text}
-                <button>
-                  SELECTED
+                <button onClick={() => handleClick("button 1")}>
+                  { selectedButton == "button 1" ? "SELECTED" : "select"}
                 </button>
               </div>
 
-              <div className="answer">
+              <div className={`answer ${selectedButton == "button 2" ? "selected" : ""}`}>
                 {fetchQuiz.quiz.answers[1].text}
-                <button>
-                  Select
+                <button onClick={() => handleClick("button 2")}>
+                { selectedButton == "button 2" ? "SELECTED" : "select"}
                 </button>
               </div>
             </div>
