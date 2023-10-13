@@ -1,7 +1,7 @@
 // ❗ You don't need to add extra action creators to achieve MVP
 
 import axios from "axios"
-import { SET_SELECTED_ANSWER, RESET_FORM, MOVE_CLOCKWISE, MOVE_COUNTERCLOCKWISE, SET_QUIZ_INTO_STATE} from "./action-types"
+import { SET_SELECTED_ANSWER, RESET_FORM, MOVE_CLOCKWISE, MOVE_COUNTERCLOCKWISE, SET_QUIZ_INTO_STATE, SET_INFO_MESSAGE, RESET_QUIZ_STATE} from "./action-types"
 
 export function moveClockwise() {
   return {type: MOVE_CLOCKWISE}
@@ -34,10 +34,10 @@ export function fetchQuiz() {
     // On successful GET:
     // - Dispatch an action to send the obtained quiz to its state
     dispatch({type: SET_QUIZ_INTO_STATE, payload: null})
-    console.log("reseted")
+    // console.log("reseted")
     axios.get("http://localhost:9000/api/quiz/next")
     .then(res => {
-      console.log("res.data: ", res.data)
+      // console.log("res.data: ", res.data)
       dispatch({type: SET_QUIZ_INTO_STATE, payload: res.data})
     })
     .catch(err => {
@@ -46,12 +46,22 @@ export function fetchQuiz() {
   }
   }
 // }
-export function postAnswer() {
+export function postAnswer(data) {
   return function (dispatch) {
+    console.log(data)
     // On successful POST:
     // - Dispatch an action to reset the selected answer state
     // - Dispatch an action to set the server message to state
     // - Dispatch the fetching of the next quiz
+    axios.post("http://localhost:9000/api/quiz/answer", data)
+    .then(res => {
+      console.log(res.data.message)
+    dispatch({type: SET_INFO_MESSAGE, payload: res.data.message})
+
+    })
+    
+    dispatch({type: RESET_QUIZ_STATE})
+    dispatch(fetchQuiz())
   }
 }
 export function postQuiz() {
