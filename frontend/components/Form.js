@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import * as actionCreators from '../state/action-creators'
 
@@ -9,18 +9,26 @@ newFalseAnswer: "",
 }
 
 export function Form(props) {
-
-  const [enteredField, setEnteredField] = useState(initialState)
+  
+  const [enteredField, setEnteredField] = useState(props.form)
+  useEffect(() => {
+    // if(props.form !== initialState) {
+      props.inputChange(enteredField)
+    // } else {
+      // return
+  // }
+    console.log("Use effect has ran")
+  }, [enteredField])
 
   // console.log(props)
 // console.log(enteredField)
-
+// console.log(props)
   
+
   const onChangeNewQuestion = event => {
-    console.log(event.target)
+    // console.log(event.target)
     // setEnteredField({...enteredField, newQuestion: event.target.value})
     setEnteredField({...enteredField, newQuestion:event.target.value})
-    // props.inputChangeQuestion(enteredField)
   }
   const onChangeNewTrueAnswer = event => {
     setEnteredField({...enteredField, newTrueAnswer: event.target.value})
@@ -37,9 +45,9 @@ export function Form(props) {
   return (
     <form id="form" onSubmit={onSubmit}>
       <h2>Create New Quiz</h2>
-      <input maxLength={50} onChange={event => onChangeNewQuestion(event)} value={enteredField.newQuestion} id="newQuestion" placeholder="Enter question" />
-      <input maxLength={50} onChange={event => onChangeNewTrueAnswer(event)} id="newTrueAnswer" value={enteredField.newTrueAnswer} placeholder="Enter true answer" />
-      <input maxLength={50} onChange={event => onChangeNewFalseAnswer(event)} id="newFalseAnswer" value={enteredField.newFalseAnswer} placeholder="Enter false answer" />
+      <input maxLength={50} onChange={event => onChangeNewQuestion(event)} value={props.form.newQuestion} id="newQuestion" placeholder="Enter question" />
+      <input maxLength={50} onChange={event => onChangeNewTrueAnswer(event)} id="newTrueAnswer" value={props.form.newTrueAnswer} placeholder="Enter true answer" />
+      <input maxLength={50} onChange={event => onChangeNewFalseAnswer(event)} id="newFalseAnswer" value={props.form.newFalseAnswer} placeholder="Enter false answer" />
       <button id="submitNewQuizBtn" disabled={enteredField.newQuestion.trim() == "" || enteredField.newTrueAnswer.trim() == "" || enteredField.newFalseAnswer.trim() == ""} >Submit new quiz</button>
     </form>
   )
