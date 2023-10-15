@@ -5,20 +5,19 @@ import { useDispatch, connect } from 'react-redux'
 
 
 
-function Quiz(fetchQuiz, quiz, selectAnswer, postAnswer) {
-  console.log(fetchQuiz)
+function Quiz(fetchQuiz, quiz, selectAnswer, postAnswer, resetter) {
+  console.log(fetchQuiz.resetter)
   const [selectedButton, setSelectedButton] = useState(null)
 
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   useEffect(() => {
-    const fetchDataAndDispatch = () => {
-      const data = fetchQuiz.fetchQuiz();
-      if (data) {
-        dispatch(fetchUserData(data));
-      }
+    if(fetchQuiz.quiz == null) {
+      fetchQuiz.fetchQuiz()
+      console.log("how")
+    } else {
+      return
     }
-    fetchDataAndDispatch()
-    }, [quiz])
+    }, [fetchQuiz.resetter])
 
     const handleClick = (number) => {
       setSelectedButton(number)
@@ -65,6 +64,7 @@ const mapStateToProps = state => {
   // console.log(state)
   return {
     quiz: state.quiz,
+    resetter: state.resetter
   }
 }
 
