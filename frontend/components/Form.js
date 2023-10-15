@@ -12,22 +12,11 @@ export function Form(props) {
   
   const [enteredField, setEnteredField] = useState(props.form)
   useEffect(() => {
-    // if(props.form !== initialState) {
-      props.inputChange(enteredField)
-    // } else {
-      // return
-  // }
-    console.log("Use effect has ran")
+    props.inputChange(enteredField)
+    
   }, [enteredField])
 
-  // console.log(props)
-// console.log(enteredField)
-// console.log(props)
-  
-
   const onChangeNewQuestion = event => {
-    // console.log(event.target)
-    // setEnteredField({...enteredField, newQuestion: event.target.value})
     setEnteredField({...enteredField, newQuestion:event.target.value})
   }
   const onChangeNewTrueAnswer = event => {

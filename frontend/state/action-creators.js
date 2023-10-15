@@ -35,11 +35,8 @@ export function fetchQuiz() {
     // First, dispatch an action to reset the quiz state (so the "Loading next quiz..." message can display)
     // On successful GET:
     // - Dispatch an action to send the obtained quiz to its state
-    // dispatch({type: SET_QUIZ_INTO_STATE, payload: null})
-    // console.log("reseted")
     axios.get("http://localhost:9000/api/quiz/next")
     .then(res => {
-      // console.log("res.data: ", res.data)
       dispatch({type: SET_QUIZ_INTO_STATE, payload: res.data})
     })
     .catch(err => {
@@ -61,10 +58,7 @@ export function postAnswer(data) {
     dispatch({type: SET_INFO_MESSAGE, payload: res.data.message})
     dispatch({type: RESET_QUIZ_STATE})
     dispatch({type: RESETTER})
-
     })
-    
-    // dispatch(fetchQuiz())
   }
 }
 export function postQuiz(data) {
@@ -78,7 +72,6 @@ export function postQuiz(data) {
       console.log(res)
       dispatch({type: SET_INFO_MESSAGE, payload: 'Congrats: "' + res.data.question + '" is a great question!'})
     })
-    
   }
 }
 // ❗ On promise rejections, use log statements or breakpoints, and put an appropriate error message in state

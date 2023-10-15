@@ -5,11 +5,10 @@ import { useDispatch, connect } from 'react-redux'
 
 
 
-function Quiz(fetchQuiz, quiz, selectAnswer, postAnswer, resetter) {
+function Quiz(fetchQuiz) {
   console.log(fetchQuiz.resetter)
   const [selectedButton, setSelectedButton] = useState(null)
 
-  // const dispatch = useDispatch()
   useEffect(() => {
     if(fetchQuiz.quiz == null) {
       fetchQuiz.fetchQuiz()
@@ -60,8 +59,6 @@ function Quiz(fetchQuiz, quiz, selectAnswer, postAnswer, resetter) {
 }
 
 const mapStateToProps = state => {
-  // console.log("State in mapStateToProps", state.quiz)
-  // console.log(state)
   return {
     quiz: state.quiz,
     resetter: state.resetter
